@@ -1,5 +1,7 @@
 package jp.ac.hcs.s3a327.zipcode;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,7 +23,7 @@ public class ZipCodeService {
 	RestTemplate restTemplate;
 	
 	/** 郵便番号検索API　リクエストURL */
-	private static final String URL = "http://zipcloud.ibsnet.co.jp/doc/api/search?zipcode={zipcode}";
+	private static final String URL = "https://zipcloud.ibsnet.co.jp/api/search?zipcode={zipcode}";
 	
 	/**
 	 * 指定した郵便番号に紐づく郵便番号情報を取得する。
@@ -29,6 +31,7 @@ public class ZipCodeService {
 	 * @return ZipCode Entity
 	 */
 	public ZipCodeEntity getZip(String zipcode) {
+		
 		//APIへアクセスして、結果を取得
 		String json = restTemplate.getForObject(URL, String.class, zipcode);
 		
@@ -46,9 +49,32 @@ public class ZipCodeService {
 			zipCodeEntity.setStatus(status);
 			//messageパラメータの抽出
 			String message = node.get("message").asText();
-			zipCodeEntity.setMessage(status);
-			//messageパラメータの抽出
+			zipCodeEntity.setMessage(message);
+			
+			//resultsパラメータの抽出（配列分取得する）
+			for (JsonNode result : node.get("results")) {
+				//データクラスの生成（result1件分）
+				ZipCodeData zipCodeData = new ZipCodeData();
+				
+				zipCodeData.setZipcode(result.get("zipcode").asText());
+				zipCodeData.setPrefcode(result.get("prefcode").asText());
+				zipCodeData.setAddress1(result.get("address1").asText());
+				zipCodeData.setAddress2(result.get("address2").asText());
+				zipCodeData.setAddress3(result.get("address3").asText());
+				zipCodeData.setKana1(result.get("kana1").asText());
+				zipCodeData.setKana2(result.get("kana2").asText());
+				zipCodeData.setKana3(result.get("kana3").asText());
+				
+				//可変長配列の末尾に追加
+				zipCodeEntity.getResults().add(zipCodeData);
+			}
+		}catch (IOException e) {
+				//例外発生時は、エラーメッセージの詳細を標準エラー出力
+				e.printStackTrace();
 		}
+		
+		return zipCodeEntity;
+			
 	}
 	
 }
