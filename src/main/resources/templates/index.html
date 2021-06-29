@@ -71,7 +71,7 @@
 			<div class="col-sm-6">
 				<div class="content-box">
 					<h2>住所検索 - 郵便番号</h2>
-					<form method="post" th:action="@{/zip}">
+					<form method="post" th:action="@{/zip}" name="form" onSubmit="return check()">
 						<div class="input-group">
 							<input type="number" class="form-control" name="zipcode"
 								placeholder="郵便番号 : XXXXXXX"> <span
@@ -98,5 +98,30 @@
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 		crossorigin="anonymous"></script>
+		
+		
+	<!-- 入力チェックスクリプト -->
+	<script type="text/javascript"> 
+	
+	function check(){
+
+		var flag = 0;
+		// 設定開始（必須にする項目を設定）
+
+		if(document.form.zipcode.value == ""){ //入力チェック
+			flag = 1;
+		}
+
+
+		if(flag){
+			window.alert('郵便番号が正しくありません'); // 入力漏れでアラート表示
+			return false; // 送信を中止
+		}
+		else{
+			return true; // 送信を実行
+		}
+	
+	}
+	</script>
 </body>
 </html>
