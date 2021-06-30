@@ -27,13 +27,13 @@ public class WeatherService {
 	
 	/**
 	 * 今日の日付から札幌の天気予報情報を取得する。
-	 * @param dateLabel 日付（7桁、ハイフン無し）
+	 * @param cityCode 都市コード
 	 * @return Weather Entity
 	 */
-	public WeatherEntity getWeather(String dateLabel) {
+	public WeatherEntity getWeather(String cityCode) {
 		
 		//APIへアクセスして、結果を取得
-		String json = restTemplate.getForObject(URL, String.class, dateLabel);
+		String json = restTemplate.getForObject(URL, String.class, cityCode);
 		
 		//エンティティクラスを生成
 		WeatherEntity weatherEntity = new WeatherEntity();
@@ -52,15 +52,15 @@ public class WeatherService {
 			weatherEntity.setDescription(description);
 			
 			//resultsパラメータの抽出（配列分取得する）
-			for (JsonNode result : node.get("results")) {
+			for (JsonNode forecast : node.get("forecasts")) {
 				//データクラスの生成（result1件分）
 				WeatherData weatherData = new WeatherData();
 				
-				weatherData.setDateLabel(result.get("dateLabel").asText());
-				weatherData.setTelop(result.get("telop").asText());
+				weatherData.setDateLabel(forecast.get("dateLabel").asText());
+				weatherData.setTelop(forecast.get("telop").asText());
 				
 				//可変長配列の末尾に追加
-				weatherEntity.getResults().add(weatherData);
+				weatherEntity.getForecasts().add(weatherData);
 			}
 		}catch (IOException e) {
 				//例外発生時は、エラーメッセージの詳細を標準エラー出力

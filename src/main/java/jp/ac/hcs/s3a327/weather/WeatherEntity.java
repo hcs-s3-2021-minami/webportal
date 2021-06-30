@@ -20,7 +20,7 @@ public class WeatherEntity {
 	private String description;
 	
 	/** 天気情報のリスト **/
-	private List<WeatherData> results = new ArrayList<WeatherData>();
+	private List<WeatherData> forecasts = new ArrayList<WeatherData>();
 	
 
 }
