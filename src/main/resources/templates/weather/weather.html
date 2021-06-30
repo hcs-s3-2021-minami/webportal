@@ -4,7 +4,7 @@
 <head>
 
 <meta charset="UTF-8">
-<title>WebPortal Zip</title>
+<title>WebPortal Main</title>
 
 <!-- モバイル設定 -->
 <meta id="viewport" name="viewport"
@@ -67,17 +67,12 @@
 	<!-- コンテンツ -->
 	<div class="container">
 		<div class="content-box">
-			<h2>札幌の天気予報</h2>
-			<h3>検索結果</h3>
-			<!-- 基本1件だが、API構造に従い繰り返し構文とする -->
-				<ul th:each="result : ${zipCodeEntity.results}" th:object="${result}">
-					<li><span th:text="*{zipcode}"></span></li>
-					<li><span th:text="*{address1}"></span></li>
-					<li><span th:text="*{address2}"></span></li>
-					<li><span th:text="*{address3}"></span></li>
-					<li><span th:text="*{kana1}"></span></li>
-					<li><span th:text="*{kana2}"></span></li>
-					<li><span th:text="*{kana3}"></span></li>
+			<h2>郵便番号</h2>
+			<h5>（詳細）</h5>
+			<!-- 今日、明日、明後日の3件表示 -->
+				<ul th:each="result : ${weatherEntity.results}" th:object="${result}">
+					<li><span th:text="*{dateLabel}"></span></li>
+					<li><span th:text="*{telop}"></span></li>
 				</ul>
 		</div>
 	</div>
