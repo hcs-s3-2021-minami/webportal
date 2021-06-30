@@ -58,6 +58,7 @@ public class WeatherService {
 				
 				weatherData.setDateLabel(forecast.get("dateLabel").asText());
 				weatherData.setTelop(forecast.get("telop").asText());
+//				weatherData.setTelop(forecast.get("description").asText());
 				
 				//可変長配列の末尾に追加
 				weatherEntity.getForecasts().add(weatherData);
