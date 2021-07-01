@@ -16,21 +16,20 @@ public class TaskController {
 
 	/**
 	 * タスク管理リストから情報を受け取り、結果画面を表示する
-	 * @param zipcode 検索する郵便番号（ハイフン無し）
 	 * @param principal ログイン情報
 	 * @param model
-	 * @return 結果画面 - 郵便番号
+	 * @return 結果画面 - タスク管理
 	 */
 	@GetMapping("/taskList")
-	public String getTaskList(String id,Principal principal, Model model){
+	public String getTasklist(Principal principal, Model model){
 		
-		TaskEntity taskeEntity = taskService.getTaskList(id);
+		TaskEntity taskEntity = taskService.selectAll(principal.getName());
 		model.addAttribute("taskEntity", taskEntity);
 		
-		log.info("[" + principal.getName() + "]");
-		if (id == "") {
-			return "index";
-		}
+//		log.info("[" + principal.getName() + "]天気予報検索:" + uset_id);
+//		if (uset_id == "") {
+//			return "index";
+//		}
 		return "task/task";
 	}
 }

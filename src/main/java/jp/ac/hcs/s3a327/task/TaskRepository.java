@@ -29,6 +29,18 @@ public class TaskRepository {
 	JdbcTemplate jdbc;
 	
 	/**
+	 * TaskテーブルからユーザIDをキーに全データを取得。
+	 * @param user_id 検索するユーザID
+	 * @return TaskEntity
+	 * @throws DataAccessException
+	 */
+	public TaskEntity selectAll(String user_id) throws DataAccessException {
+		List<Map<String, Object>> resultList = jdbc.queryForList(SQL_SELECT_ALL,user_id);
+		TaskEntity taskEntity = mappingSelectResult(resultList);
+		return taskEntity;
+	}
+	
+	/**
 	 * Taskテーブルから取得したデータをTaskEntity形式にマッピングする。
 	 * @param resultList Taskテーデータ
 	 * @return TaskEntity
@@ -70,6 +82,7 @@ public class TaskRepository {
 		int rowNumber = jdbc.update(SQL_DELETE_ONE, id);
 		return rowNumber;
 	}
+	
 }
 
 

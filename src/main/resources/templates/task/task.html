@@ -83,12 +83,12 @@
 			
 			<hr>
 			
-			<ul th:each="task : ${taskEntity}">
+			<ul th:each="task : ${taskEntity.tasklist}">
 				<li>
 					<a th:href="@{'/task/delete/' + ${task.id}}">
-					<span th:text="${comment}"></span>
+					<span th:text="${task.comment}"></span>
 					</a>
-					<span th:text="${limitday}"></span>
+					<span th:text="${task.limitday}"></span>
 				</li>
 			</ul>
 			
