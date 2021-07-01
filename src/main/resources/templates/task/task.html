@@ -83,14 +83,23 @@
 			
 			<hr>
 			
-			<ul th:each="task : ${taskEntity.tasklist}">
-				<li>
-					<a th:href="@{'/task/delete/' + ${task.id}}">
-					<span th:text="${task.comment}"></span>
-					</a>
-					<span th:text="${task.limitday}"></span>
-				</li>
-			</ul>
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col" class="table-info">内容</th>
+						<th scope="col" class="table-info">期限</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="task : ${taskEntity.tasklist}">
+						<td>
+						<a th:href="@{'/task/delete/' + ${task.id}}" th:text="${task.comment}"></a>
+						</td>
+						<td th:text="${task.limitday}">
+						</td>
+					</tr>
+  				</tbody>
+			</table>
 			
 			<hr>
 			
