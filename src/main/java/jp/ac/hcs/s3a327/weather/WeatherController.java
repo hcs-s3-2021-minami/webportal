@@ -16,8 +16,8 @@ public class WeatherController {
 	private WeatherService weatherService;
 
 	/**
-	 * 今日の日付から札幌の天気予報を検索し、結果画面を表示する
-	 * @param dateLabel 検索する日付（ハイフン無し）
+	 * 都市コードから札幌の天気予報を検索し、結果画面を表示する
+	 * @param cityCode 都市コード
 	 * @param principal ログイン情報
 	 * @param model
 	 * @return 結果画面 - 日付
