@@ -21,6 +21,7 @@ h1 {
 	padding: 10px;
 	border-radius: 3px;
 	background-color: #d9fafb;
+	text-align: center
 }
 
 .content-box ul {
@@ -52,8 +53,8 @@ h1 {
 	max-width: 600px;
 }
 
-.input-box {
-	margin-bottom: 30px;
+.input-group {
+   text-align:center;
 }
 
 .mode-dark {
