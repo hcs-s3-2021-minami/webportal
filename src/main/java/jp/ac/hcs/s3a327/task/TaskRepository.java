@@ -70,7 +70,6 @@ public class TaskRepository {
 						data.getUser_id(),
 						data.getComment(),
 						data.getLimitday());
-		System.out.println(rowNumber);
 		return rowNumber;
 	}
 	/**

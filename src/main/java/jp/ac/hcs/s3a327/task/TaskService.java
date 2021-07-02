@@ -1,9 +1,10 @@
 package jp.ac.hcs.s3a327.task;
 
-import java.util.Date;
+import java.text.SimpleDateFormat;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.expression.ParseException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -42,13 +43,13 @@ public class TaskService {
 	 * @param userId
 	 * @return TaskEntity
 	 */
-	public int insertOne(String userId, String comment, String limitday) {
+	public int insertOne(String userId, String comment, String limitday) throws ParseException{
 		
 		TaskData data = new TaskData();
-		data.setId((Integer) map.get("id"));
-		data.setUser_id((String) map.get("user_id"));
-		data.setComment((String) map.get("comment"));
-		data.setLimitday((Date) map.get("limitday"));
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		data.setUser_id(userId);
+		data.setComment(comment);
+		data.setLimitday(dateFormat.parse(limitday));
 		
 		try {
 			int rowNumber = taskRepository.insertOne(data);

@@ -21,7 +21,7 @@ public class TaskController {
 	 * @param model
 	 * @return 結果画面 - タスク管理リスト
 	 */
-	@GetMapping("/task/tasklist")
+	@GetMapping("/tasklist")
 	public String getTasklist(Principal principal, Model model){
 		
 		TaskEntity taskEntity = taskService.selectAll(principal.getName());
@@ -41,7 +41,7 @@ public class TaskController {
 	 * @param model
 	 * @return 結果画面 - タスク管理追加
 	 */
-	@GetMapping("/task/taskinsert")
+	@GetMapping("/taskinsert")
 	public String insertTask(@RequestParam("comment") String comment,@RequestParam("limitday") String limitday,
 			Principal principal, Model model){
 		
