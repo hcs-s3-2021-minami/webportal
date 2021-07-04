@@ -42,21 +42,27 @@ public class TaskService {
 	 * 指定したユーザIDのタスク情報を1件追加する。
 	 * @param userId
 	 * @return TaskEntity
+	 * @throws java.text.ParseException 
 	 */
-	public int insertOne(String userId, String comment, String limitday) throws ParseException{
+	public boolean insertOne(String userId, String comment, String limitday) throws ParseException, java.text.ParseException{
 		
 		TaskData data = new TaskData();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		data.setUser_id(userId);
 		data.setComment(comment);
 		data.setLimitday(dateFormat.parse(limitday));
+		boolean isSuccess = false;
 		
 		try {
 			int rowNumber = taskRepository.insertOne(data);
 			
+			if(rowNumber >= 1) {
+				isSuccess = true;
+			}
+			 
 		}catch(DataAccessException e){
 			e.printStackTrace();
-			boolean isSuccess = taskRepository.insertOne(principal.getName(),comment,limitday);
+			
 		}
 		
 		return isSuccess;

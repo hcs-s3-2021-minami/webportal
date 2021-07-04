@@ -3,9 +3,11 @@ package jp.ac.hcs.s3a327.task;
 import java.security.Principal;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.expression.ParseException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import lombok.extern.slf4j.Slf4j;
@@ -36,18 +38,20 @@ public class TaskController {
 	
 	
 	/**
-	 * タスク管理リストから情報を受け取り、結果画面を表示する
+	 * タスク管理リストから情報を受け取り、タスク管理リストに追加する
 	 * @param principal ログイン情報
 	 * @param model
 	 * @return 結果画面 - タスク管理追加
+	 * @throws java.text.ParseException 
+	 * @throws ParseException 
 	 */
-	@GetMapping("/taskinsert")
+	@PostMapping("/taskinsert")
 	public String insertTask(@RequestParam("comment") String comment,@RequestParam("limitday") String limitday,
-			Principal principal, Model model){
+			Principal principal, Model model) throws ParseException, java.text.ParseException{
 		
 		boolean isSuccess = taskService.insertOne(principal.getName(),comment,limitday);
 		
-		log.info("[" + principal.getName() + "]タスク追加:" + "コメント:" + comment + "期限日:" + limitday);
+		log.info("[" + principal.getName() + "]タスク追加:  " + "コメント:" + comment + "  期限日:" + limitday);
 		if (isSuccess) {
 			log.info("成功");
 		}else {
