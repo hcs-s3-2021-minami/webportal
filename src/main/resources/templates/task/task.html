@@ -34,7 +34,7 @@
 	href="../static/css/ress.css">
 <link rel="stylesheet" th:href="@{/css/home.css}"
 	href="../static/css/home.css">
-
+<script th:src="@{/js/task.js}"></script>
 </head>
 
 <body th:classappend="${session.isDarkmode} ? 'mode-dark'">
@@ -122,13 +122,5 @@
 		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 		crossorigin="anonymous"></script>
 		
-	<!-- 入力チェックスクリプト -->
-	<script type="text/javascript"> 
-	
-	function check(){
-
-			window.alert('完了したタスクを削除します。よろしいですか？'); // 確認用アラート表示
-	
-	</script>
 </body>
 </html>
