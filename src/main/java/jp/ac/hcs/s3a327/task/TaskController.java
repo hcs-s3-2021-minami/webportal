@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -58,9 +59,32 @@ public class TaskController {
 		
 		log.info("[" + principal.getName() + "]タスク追加:  " + "コメント:" + comment + "  期限日:" + limitday);
 		if (isSuccess) {
-			log.info("成功");
+			log.info("追加成功");
 		}else {
-			log.info("失敗");
+			log.info("追加失敗");
+		}
+		return getTasklist(principal,model);
+	}
+	
+	/**
+	 * タスク管理リストから選択されたタスクをタスク管理リストから削除する
+	 * @param principal ログイン情報
+	 * @param model
+	 * @return 結果画面 - タスク管理削除
+	 * @throws java.text.ParseException 
+	 * @throws ParseException 
+	 */
+	@GetMapping("/taskdelete/{id}")
+	public String deleteTask(@PathVariable("id") int id,
+			Principal principal, Model model) throws ParseException, java.text.ParseException{
+		
+		boolean isSuccess = taskService.deleteOne(id);
+		
+		log.info("[" + principal.getName() + "]タスク削除:  " + "id:  " + id);
+		if (isSuccess) {
+			log.info("削除成功");
+		}else {
+			log.info("削除失敗");
 		}
 		return getTasklist(principal,model);
 	}

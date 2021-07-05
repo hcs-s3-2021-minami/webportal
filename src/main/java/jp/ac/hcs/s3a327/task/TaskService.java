@@ -74,6 +74,25 @@ public class TaskService {
 			
 	}
 	
+	public boolean deleteOne(int id) throws ParseException, java.text.ParseException{
+		boolean isSuccess = false;
+		
+		try {
+			int rowNumber = taskRepository.deleteOne(id);
+			
+			if(rowNumber >= 1) {
+				isSuccess = true;
+			}
+			 
+		}catch(DataAccessException e){
+			e.printStackTrace();
+			
+		}
+		
+		return isSuccess;
+			
+	}
+	
 	/**
 	 * タスク情報をCSVファイルとしてサーバに保存する.
 	 * @param user_id ユーザID
