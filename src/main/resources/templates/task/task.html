@@ -92,7 +92,7 @@
 				<tbody>
 					<tr th:each="task : ${taskEntity.tasklist}">
 						<td class="table-light">
-						<a th:href="@{'/task/delete/' + ${task.id}}" th:text="${task.comment}"></a>
+						<a th:href="@{'/taskdelete/' + ${task.id}}" th:text="${task.comment}"  onclick="check()"></a>
 						</td>
 						<td th:text="${task.limitday}" class="table-light">
 						</td>
@@ -121,5 +121,14 @@
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 		crossorigin="anonymous"></script>
+		
+	<!-- 入力チェックスクリプト -->
+	<script type="text/javascript"> 
+	
+	function check(){
+
+			window.alert('完了したタスクを削除します。よろしいですか？'); // 確認用アラート表示
+	
+	</script>
 </body>
 </html>
