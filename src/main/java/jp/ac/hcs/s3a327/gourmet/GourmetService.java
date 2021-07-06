@@ -49,10 +49,6 @@ public class GourmetService {
 			//変換クラスを生成し、文字列からjsonクラスへ変換する（例外の可能性あり）
 			ObjectMapper mapper = new ObjectMapper();
 			JsonNode node = mapper.readTree(json);
-			
-//			//shopnameパラメータの抽出
-//			String shopname = node.get("shopname").asText();
-//			shopEntity.setShopname(shopname);
 
 			
 			//resultsパラメータの抽出（配列分取得する）
@@ -67,7 +63,7 @@ public class GourmetService {
 				shopData.setAddress(shop.get("address").asText());
 				shopData.setAccess(shop.get("access").asText());
 				shopData.setUrl(shop.get("urls").get("pc").asText());
-				shopData.setImage(shop.get("image").get("mobile").get("l").asText());
+				shopData.setImage(shop.get("photo").get("mobile").get("l").asText());
 				
 				//可変長配列の末尾に追加
 				shopEntity.getResults().add(shopData);
