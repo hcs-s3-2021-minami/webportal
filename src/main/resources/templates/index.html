@@ -70,22 +70,30 @@
 			
 			<div class="col-sm-6">
 				<div class="content-box">
-					<h2>札幌の天気予報</h2>
+					<h2>北海道の天気予報</h2>
 					<form method="post" th:action="@{/weather}" name="form_weather">
-					
-						<div class="input-group">
-							<!-- 
-							<select name="cityCode">
-							<option value="A">A型</option>
-							<option value="B">B型</option>
-							<option value="O">O型</option>
-							<option value="AB">AB型</option>
+					<div class="input-group">
+					<select name="cityCode" class="form-control">
+								<option value="">選択してください</option>
+								<option value="011000">稚内</option>
+								<option value="012010">旭川</option>
+								<option value="012020">留萌</option>
+								<option value="013010">網走</option>
+								<option value="013020">北見</option>
+								<option value="013030">紋別</option>
+								<option value="014010">根室</option>
+								<option value="014020">釧路</option>
+								<option value="014030">帯広</option>
+								<option value="015010">室蘭</option>
+								<option value="015020">浦河</option>
+								<option value="017010">函館</option>
+								<option value="017020">江差</option>
+								<option value="016010">札幌</option>
+								<option value="016020">岩見沢</option>
+								<option value="016030">俱知安</option>
 							</select>
-							 -->
-							 <span class="input-group-btn">
-								<button type="submit" name="cityCode" value='016010' class="btn btn-primary">天気を見る</button>
-							</span>
-						</div>
+							<button type="submit" class="btn btn-primary">天気を見る</button>
+					</div>
 					</form>
 				</div>
 			</div>
@@ -94,11 +102,7 @@
 				<div class="content-box">
 					<h2>直近のタスク</h2>
 					<form method="get" th:action="@{/tasklist}" name="form_task">
-						<div class="input-group">
-							 <span class="input-group-btn">
 								<button type="submit" class="btn btn-primary">タスク管理へ</button>
-							</span>
-						</div>
 					</form>
 				</div>
 			</div>

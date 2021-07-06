@@ -28,6 +28,7 @@ public class ShopController {
 		
 		ShopEntity shopEntity = gourmetService.getShop(shopname);
 		model.addAttribute("shopEntity", shopEntity);
+		model.addAttribute("shopname", shopname);
 		
 		log.info("[" + principal.getName() + "]グルメ検索:" + shopname);
 		if (shopname == "") {
