@@ -67,7 +67,8 @@
 	<!-- コンテンツ -->
 	<div class="container">
 		<div class="content-box">
-			<h2>札幌の天気予報</h2>
+			<h1>住所検索画面</h1>
+			<h2>郵便番号</h2>
 			<h3>検索結果</h3>
 			<!-- 基本1件だが、API構造に従い繰り返し構文とする -->
 				<ul th:each="result : ${zipCodeEntity.results}" th:object="${result}">

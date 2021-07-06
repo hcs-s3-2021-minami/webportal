@@ -57,11 +57,12 @@ public class TaskService {
 		data.setComment(comment);
 		data.setLimitday(dateFormat.parse(limitday));
 		boolean isSuccess = false;
-		
+//		boolean result = limitday instanceof Date;
 		try {
 			int rowNumber = taskRepository.insertOne(data);
 			
-			if(rowNumber >= 1) {
+			if(rowNumber >= 1 || (comment != "" || comment.length() <= 50) 
+					|| (limitday != "")) {
 				isSuccess = true;
 			}
 			 
@@ -69,6 +70,8 @@ public class TaskService {
 			e.printStackTrace();
 			
 		}
+		
+		
 		
 		return isSuccess;
 			

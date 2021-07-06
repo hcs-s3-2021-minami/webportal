@@ -36,9 +36,7 @@ public class TaskController {
 		model.addAttribute("taskEntity", taskEntity);
 		
 		log.info("[" + principal.getName() + "]タスクリスト");
-		if (taskEntity == null) {
-			return "index";
-		}
+		
 		return "task/task";
 	}
 	
@@ -60,10 +58,12 @@ public class TaskController {
 		log.info("[" + principal.getName() + "]タスク追加:  " + "コメント:" + comment + "  期限日:" + limitday);
 		if (isSuccess) {
 			log.info("追加成功");
+			return getTasklist(principal,model);
 		}else {
 			log.info("追加失敗");
+			return "task/task";
 		}
-		return getTasklist(principal,model);
+		
 	}
 	
 	/**

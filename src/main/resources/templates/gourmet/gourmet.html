@@ -4,7 +4,7 @@
 <head>
 
 <meta charset="UTF-8">
-<title>WebPortal Main</title>
+<title>WebPortal Zip</title>
 
 <!-- モバイル設定 -->
 <meta id="viewport" name="viewport"
@@ -66,73 +66,14 @@
 
 	<!-- コンテンツ -->
 	<div class="container">
-		<div class="row">
-			
-			<div class="col-sm-6">
-				<div class="content-box">
-					<h2>札幌の天気予報</h2>
-					<form method="post" th:action="@{/weather}" name="form_weather">
-					
-						<div class="input-group">
-							<!-- 
-							<select name="cityCode">
-							<option value="A">A型</option>
-							<option value="B">B型</option>
-							<option value="O">O型</option>
-							<option value="AB">AB型</option>
-							</select>
-							 -->
-							 <span class="input-group-btn">
-								<button type="submit" name="cityCode" value='016010' class="btn btn-primary">天気を見る</button>
-							</span>
-						</div>
-					</form>
-				</div>
-			</div>
-			
-			<div class="col-sm-6">
-				<div class="content-box">
-					<h2>直近のタスク</h2>
-					<form method="get" th:action="@{/tasklist}" name="form_task">
-						<div class="input-group">
-							 <span class="input-group-btn">
-								<button type="submit" class="btn btn-primary">タスク管理へ</button>
-							</span>
-						</div>
-					</form>
-				</div>
-			</div>
-			
-			<div class="col-sm-6">
-				<div class="content-box">
-					<h2>住所検索 - 郵便番号</h2>
-					<form method="post" th:action="@{/zip}" name="form_zip" onSubmit="return zipcheck()">
-						<div class="input-group">
-							<input type="number" class="form-control" name="zipcode"
-								placeholder="郵便番号 : XXXXXXX"> <span
-								class="input-group-btn">
-								<button type="submit" class="btn btn-primary">検索</button>
-							</span>
-						</div>
-					</form>
-				</div>
-			</div>
-			
-			<div class="col-sm-6">
-				<div class="content-box">
-					<h2>飲食店検索 - 北海道</h2>
-					<form method="post" th:action="@{/gourme}" name="form_gourme" onSubmit="return gourmecheck()">
-						<div class="input-group">
-							<input type="text" class="form-control" name="shopname"
-								placeholder="キーワード : しゃぶしゃぶ"> <span
-								class="input-group-btn">
-								<button type="submit" class="btn btn-primary">検索</button>
-							</span>
-						</div>
-					</form>
-				</div>
-			</div>
-
+		<div class="content-box">
+			<h1>北海道グルメ</h1>
+			<h2>の検索結果</h2>
+			<!-- 基本1件だが、API構造に従い繰り返し構文とする -->
+				<ul th:each="result : ${shopEntity.results}" th:object="${shop}">
+					<li><span th:text="*{logo_image}"></span></li>
+					<li><span th:text="*{name}"></span></li>
+				</ul>
 		</div>
 	</div>
 
@@ -148,50 +89,5 @@
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 		crossorigin="anonymous"></script>
-		
-		
-	<!-- 入力チェックスクリプト -->
-	<script type="text/javascript"> 
-	
-	function zipcheck(){
-
-		var flag = 0;
-		// 設定開始（必須にする項目を設定）
-
-		if(document.form_zip.zipcode.value == ""){ //入力チェック
-			flag = 1;
-		}
-
-
-		if(flag){
-			window.alert('郵便番号を入力してください'); // 入力漏れでアラート表示
-			return false; // 送信を中止
-		}
-		else{
-			return true; // 送信を実行
-		}
-	
-	}
-	
-	function gourmecheck(){
-
-		var flag = 0;
-		// 設定開始（必須にする項目を設定）
-
-		if(document.form_gourme.shopname.value == ""){ //入力チェック
-			flag = 1;
-		}
-
-
-		if(flag){
-			window.alert('キーワードを入力してください'); // 入力漏れでアラート表示
-			return false; // 送信を中止
-		}
-		else{
-			return true; // 送信を実行
-		}
-	
-	}
-	</script>
 </body>
 </html>
