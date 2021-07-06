@@ -67,13 +67,14 @@
 	<!-- コンテンツ -->
 	<div class="container">
 		<div class="content-box">
-			<h2>札幌の天気予報</h2>
+			<h2 th:text="${weatherEntity.title}"></h2>	
 			<p>（詳細）</p>
 			<!-- 今日、明日、明後日の3件表示 -->
 				<ul th:each="forecast : ${weatherEntity.forecasts}">
 					<li><h4><span th:text="${forecast.dateLabel}"></span></h4></li>
 					<li><span th:text="${forecast.telop}"></span></li>
 				</ul>
+				<p th:text="${weatherEntity.description}"></p>
 		</div>
 	</div>
 

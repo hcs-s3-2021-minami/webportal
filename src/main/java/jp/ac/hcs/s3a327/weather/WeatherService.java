@@ -47,9 +47,12 @@ public class WeatherService {
 			//titleパラメータの抽出
 			String title = node.get("title").asText();
 			weatherEntity.setTitle(title);
+			System.out.println(title);
+			
 			//descriptionパラメータの抽出
-			String description = node.get("description").asText();
+			String description = node.get("description").get("text").asText();
 			weatherEntity.setDescription(description);
+			System.out.println(description);
 			
 			//resultsパラメータの抽出（配列分取得する）
 			for (JsonNode forecast : node.get("forecasts")) {
@@ -58,7 +61,6 @@ public class WeatherService {
 				
 				weatherData.setDateLabel(forecast.get("dateLabel").asText());
 				weatherData.setTelop(forecast.get("telop").asText());
-//				weatherData.setTelop(forecast.get("description").asText());
 				
 				//可変長配列の末尾に追加
 				weatherEntity.getForecasts().add(weatherData);

@@ -71,10 +71,10 @@
 			<div class="col-sm-6">
 				<div class="content-box">
 					<h2>北海道の天気予報</h2>
-					<form method="post" th:action="@{/weather}" name="form_weather">
+					<form method="post" th:action="@{/weather}" name="form_weather" onSubmit="return selectcheck()">
 					<div class="input-group">
 					<select name="cityCode" class="form-control">
-								<option value="">選択してください</option>
+								<option value="">都市を選択</option>
 								<option value="011000">稚内</option>
 								<option value="012010">旭川</option>
 								<option value="012020">留萌</option>
@@ -125,10 +125,10 @@
 			<div class="col-sm-6">
 				<div class="content-box">
 					<h2>飲食店検索 - 北海道</h2>
-					<form method="post" th:action="@{/gourmet}" name="form_gourme" onSubmit="return gourmecheck()">
+					<form method="post" th:action="@{/gourmet}" name="form_gourme" onSubmit="return gourmetcheck()">
 						<div class="input-group">
 							<input type="text" class="form-control" name="shopname"
-								placeholder="キーワード : しゃぶしゃぶ"> <span
+								placeholder="キーワード : 〇〇"> <span
 								class="input-group-btn">
 								<button type="submit" class="btn btn-primary">検索</button>
 							</span>
@@ -157,12 +157,32 @@
 	<!-- 入力チェックスクリプト -->
 	<script type="text/javascript"> 
 	
+	function selectcheck(){
+
+		var flag = 0;
+		// 設定開始（必須にする項目を設定）
+
+		if(document.form_weather.cityCode.value == ""){ // 入力チェック
+			flag = 1;
+		}
+
+
+		if(flag){
+			window.alert('都市を選択してください'); // 入力漏れでアラート表示
+			return false; // 送信を中止
+		}
+		else{
+			return true; // 送信を実行
+		}
+	
+	}
+	
 	function zipcheck(){
 
 		var flag = 0;
 		// 設定開始（必須にする項目を設定）
 
-		if(document.form_zip.zipcode.value == ""){ //入力チェック
+		if(document.form_zip.zipcode.value == ""){ // 入力チェック
 			flag = 1;
 		}
 
@@ -177,12 +197,12 @@
 	
 	}
 	
-	function gourmecheck(){
+	function gourmetcheck(){
 
 		var flag = 0;
 		// 設定開始（必須にする項目を設定）
 
-		if(document.form_gourme.shopname.value == ""){ //入力チェック
+		if(document.form_gourme.shopname.value == ""){ // 入力チェック
 			flag = 1;
 		}
 
