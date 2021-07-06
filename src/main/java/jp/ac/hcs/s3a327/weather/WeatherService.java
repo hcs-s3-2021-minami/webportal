@@ -47,12 +47,10 @@ public class WeatherService {
 			//titleパラメータの抽出
 			String title = node.get("title").asText();
 			weatherEntity.setTitle(title);
-			System.out.println(title);
 			
 			//descriptionパラメータの抽出
 			String description = node.get("description").get("text").asText();
 			weatherEntity.setDescription(description);
-			System.out.println(description);
 			
 			//resultsパラメータの抽出（配列分取得する）
 			for (JsonNode forecast : node.get("forecasts")) {
