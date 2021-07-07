@@ -28,33 +28,38 @@ public class UserController {
 		
 		log.info("[" + principal.getName() + "]ユーザリスト");
 		
-		return "user/userList";
+		return "user/user";
 	}
 	
+	/**
+	 * ユーザ登録画面（管理者用）を表示する。
+	 * @param form 登録時の入力チェック用UserForm
+	 * @param model
+	 * @return ユーザ登録画面（管理者用）
+	 
+	@GetMapping("/user/insert")
+	public String getUserInsert(Userform userform, Model model){
+		return "user/insert";
+	}*/
 	
 	/**
-	 * タスク管理リストから情報を受け取り、タスク管理リストに追加する
+	 * 1件分のユーザ情報をデータベースに登録する。
+	 * @param form 登録ｓるうユーザ情報（パスワードは平文）
+	 * @param bindingResult データバインド実施結果
 	 * @param principal ログイン情報
 	 * @param model
-	 * @return 結果画面 - タスク管理追加
-	 * @throws java.text.ParseException 
-	 * @throws ParseException 
+	 * @return ユーザ一覧画面
 	 
-	@PostMapping("/taskinsert")
-	public String insertTask(@RequestParam("comment") String comment,@RequestParam("limitday") String limitday,
-			Principal principal, Model model) throws ParseException, java.text.ParseException{
-		
-		boolean isSuccess = taskService.insertOne(principal.getName(),comment,limitday);
-		
-		log.info("[" + principal.getName() + "]タスク追加:  " + "コメント:" + comment + "  期限日:" + limitday);
-		if (isSuccess) {
-			log.info("追加成功");
-			return getTasklist(principal,model);
-		}else {
-			log.info("追加失敗");
-			return "task/task";
+	public String getUserInsert(@ModelAttribute @Validated UserForm form,
+			BindingResult bindingResult,
+			Principal principal, Model model) {
+	
+	//入力チェックに引っかかった場合、前の画面に戻る
+		if (bindingResult.hasErrors()) {
+			return getUserInsert(form,model);
 		}
 		
+		return getUserList(model);
 	}*/
 	
 	/**
