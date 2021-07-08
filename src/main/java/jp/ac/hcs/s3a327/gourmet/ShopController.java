@@ -23,7 +23,7 @@ public class ShopController {
 	 * @return 結果画面 - 店舗一覧
 	 */
 	@PostMapping("/gourmet")
-	public String getZipCode(@RequestParam("shopname") String shopname,
+	public String getShopname(@RequestParam("shopname") String shopname,
 			Principal principal, Model model){
 		
 		ShopEntity shopEntity = gourmetService.getShop(shopname);
