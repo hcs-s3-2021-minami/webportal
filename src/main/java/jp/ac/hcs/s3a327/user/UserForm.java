@@ -1,5 +1,9 @@
 package jp.ac.hcs.s3a327.user;
 
+
+import javax.validation.constraints.AssertFalse;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Length;
@@ -28,7 +32,7 @@ public class UserForm {
 	 */
 	@NotBlank(message = "{require_check}")
 	@Length(min=4,max=100,message = "{length_check}")
-	@Pattern(regexp = "^[a-zA-Z0-9]+$",message = "{}")
+	@Pattern(regexp = "^[a-zA-Z0-9]+$",message = "{pattern_check}")
 	private String password;
 	
 	
@@ -46,8 +50,9 @@ public class UserForm {
 	 * - OFF：false
 	 * 必須チェック、妥当性チェック（true/false)
 	 */
-	@NotBlank(message = "{require_check}")
-	@Pattern(regexp = "^[a-zA-Z0-9]+$",message = "{}")
+	//@NotBlank(message = "{require_check}")
+	//@Pattern(regexp = "^(true|false)$",message = "{pattern_check}")
+	@AssertFalse(message = "{false_check}")
 	private boolean darkmode;
 	
 	

@@ -5,7 +5,11 @@ import java.security.Principal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import lombok.extern.slf4j.Slf4j;
 @Slf4j
@@ -21,14 +25,14 @@ public class UserController {
 	 * @return 結果画面 - ユーザ管理リスト
 	 */
 	@GetMapping("/user/list")
-	public String getTasklist(Principal principal, Model model){
+	public String getUserList(Principal principal, Model model){
 		
 		UserEntity userEntity = userService.selectAll();
 		model.addAttribute("userEntity", userEntity);
 		
 		log.info("[" + principal.getName() + "]ユーザリスト");
 		
-		return "user/user";
+		return "user/userList";
 	}
 	
 	/**
@@ -36,11 +40,12 @@ public class UserController {
 	 * @param form 登録時の入力チェック用UserForm
 	 * @param model
 	 * @return ユーザ登録画面（管理者用）
+	 */
 	 
 	@GetMapping("/user/insert")
-	public String getUserInsert(Userform userform, Model model){
+	public String getUserInsert(UserForm form, Model model){
 		return "user/insert";
-	}*/
+	}
 	
 	/**
 	 * 1件分のユーザ情報をデータベースに登録する。
@@ -49,7 +54,9 @@ public class UserController {
 	 * @param principal ログイン情報
 	 * @param model
 	 * @return ユーザ一覧画面
+	 */
 	 
+	@PostMapping("/user/insert")
 	public String getUserInsert(@ModelAttribute @Validated UserForm form,
 			BindingResult bindingResult,
 			Principal principal, Model model) {
@@ -59,8 +66,18 @@ public class UserController {
 			return getUserInsert(form,model);
 		}
 		
-		return getUserList(model);
-	}*/
+		log.info("[" + principal.getName() + "]ユーザ登録データ:" + form.toString());
+		
+		UserData data = userService.refillToData(form);
+		boolean result = userService.insertOne(data);
+		if(result) {
+			model.addAttribute("message","ユーザを登録しました。");
+		}else {
+			model.addAttribute("errorMessage","ユーザ登録に失敗しました。操作をやり直してください。");
+		}
+		
+		return getUserList(principal,model);
+	}
 	
 	/**
 	 * タスク管理リストから選択されたタスクをタスク管理リストから削除する
@@ -83,41 +100,5 @@ public class UserController {
 			log.info("削除失敗");
 		}
 		return getTasklist(principal,model);
-	}*/
-	
-	
-	/**
-	 * 自分の全てのタスク情報をCSVファイルとしてダウンロードさせる.
-	 * @param principal ログイン情報
-	 * @param model
-	 * @return タスク情報のCSVファイル
-	 
-	@PostMapping("/task/csv")
-	public ResponseEntity<byte[]> getTaskCsv(Principal principal, Model model) {
-
-		final String OUTPUT_FULLPATH = WebConfig.OUTPUT_PATH + WebConfig.FILENAME_TASK_CSV;
-
-		log.info("[" + principal.getName() + "]CSVファイル作成:" + OUTPUT_FULLPATH);
-
-		// CSVファイルをサーバ上に作成
-		taskService.taskListCsvOut(principal.getName());
-
-		// CSVファイルをサーバから読み込み
-		byte[] bytes = null;
-		try {
-			bytes = taskService.getFile(OUTPUT_FULLPATH);
-			log.info("[" + principal.getName() + "]CSVファイル読み込み成功:" + OUTPUT_FULLPATH);
-		} catch (IOException e) {
-			log.warn("[" + principal.getName() + "]CSVファイル読み込み失敗:" + OUTPUT_FULLPATH);
-			e.printStackTrace();
-		}
-
-		// CSVファイルのダウンロード用ヘッダー情報設定
-		HttpHeaders header = new HttpHeaders();
-		header.add("Content-Type", "text/csv; charset=UTF-8");
-		header.setContentDispositionFormData("filename", WebConfig.FILENAME_TASK_CSV);
-
-		// CSVファイルを端末へ送信
-		return new ResponseEntity<byte[]>(bytes, header, HttpStatus.OK);
 	}*/
 }
