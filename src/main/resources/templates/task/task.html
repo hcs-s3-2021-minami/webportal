@@ -83,18 +83,18 @@
 			<br>
 			<br>
 			<table class="table">
-				<thead>
+				<thead class="table-primary">
 					<tr>
-						<th scope="col" class="table-primary">内容</th>
-						<th scope="col" class="table-primary">期限</th>
+						<th scope="col">内容</th>
+						<th scope="col">期限</th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody class="table-light">
 					<tr th:each="task : ${taskEntity.tasklist}">
-						<td class="table-light">
+						<td>
 						<a th:href="@{'/taskdelete/' + ${task.id}}" th:text="${task.comment}"  onclick="check()"></a>
 						</td>
-						<td th:text="${task.limitday}" class="table-light">
+						<td th:text="${task.limitday}">
 						</td>
 					</tr>
   				</tbody>

@@ -113,10 +113,8 @@
 					<form method="post" th:action="@{/zip}" name="form_zip" onSubmit="return zipcheck()">
 						<div class="input-group">
 							<input type="number" class="form-control" name="zipcode"
-								placeholder="郵便番号 : XXXXXXX"> <span
-								class="input-group-btn">
+								placeholder="郵便番号 : XXXXXXX">
 								<button type="submit" class="btn btn-primary">検索</button>
-							</span>
 						</div>
 					</form>
 				</div>
@@ -141,7 +139,7 @@
 				<div class="content-box">
 					<h2>ユーザ管理</h2>
 					<form method="get" th:action="@{/user/list}" name="form_user" onSubmit="return usercheck()">
-						<button type="submit" class="btn btn-primary">ユーザ管理へ</button>
+						<button type="submit" class="btn btn-info">ユーザ管理へ</button>
 					</form>
 				</div>
 			</div>

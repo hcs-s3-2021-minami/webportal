@@ -91,7 +91,7 @@ public class UserController {
 	public String getUserDetail(@PathVariable("id") String user_id,
 			Principal principal, Model model){
 		
-		
+		UserData data = userService.selectOne(user_id);
 		
 		model.addAttribute("userData",data);
 		return "user/detail";

@@ -51,6 +51,24 @@ public class UserService {
 		return rowNumber > 0;	
 	}
 	
+	/**
+	 * ユーザ情報を1件選択する。
+	 * @param userData取得するユーザ情報
+	 * @return 処理結果（成功：true,失敗：false）
+	 */
+	public UserData selectOne(String user_id) {
+		UserData userData = new UserData();
+		try {
+			userData = userRepository.selectOne(user_id);
+			
+		}catch(DataAccessException e){
+			e.printStackTrace();
+			
+		}
+		
+		return userData;
+			
+	}
 	
 	/**
 	 * 入力項目をUserDataへ変換する
