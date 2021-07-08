@@ -85,7 +85,6 @@ public class UserRepository {
 			data.setUser_name((String) map.get("user_name"));
 			data.setDarkmode((boolean) map.get("darkmode"));
 			data.setRole((String) map.get("role"));
-			data.setEnabled((boolean) map.get("enabled"));
 			
 			
 			entity.getUserlist().add(data);
