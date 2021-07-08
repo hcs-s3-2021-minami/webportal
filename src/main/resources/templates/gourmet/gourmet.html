@@ -69,11 +69,9 @@
 		<div class="content-box">
 			<h1>北海道グルメ</h1>
 			<h2 th:text="|*{shopname}の検索結果|"></h2>
-			<h2>検索結果</h2>
 			<!-- 基本1件だが、API構造に従い繰り返し構文とする -->
 				<ul th:each="shop : ${shopEntity.results}">
 					<li><img class="shopimage" th:src="*{shop.logo_image}"/></li>
-					<!--<li><a th:href="${shop.url}" target="new" th:text="*{shop.name}"></a></li>-->
 					<li><a th:href="@{'https://www.google.com/maps/search/?api=1&query='+${shop.address}}" target="new" th:text="*{shop.name}"></a></li>
 					<li><a th:text="*{shop.access}"></a></li>
 				</ul>
