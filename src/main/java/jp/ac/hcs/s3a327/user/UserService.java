@@ -71,6 +71,25 @@ public class UserService {
 	}
 	
 	/**
+	 * ユーザ情報を1件削除する。
+	 * @param userData 削除するユーザ情報
+	 * @return 処理結果（成功：true,失敗：false）
+	 */
+	public boolean deleteOne(String user_id) {
+		int rowNumber;
+		
+		try {
+			rowNumber = userRepository.deleteOne(user_id);
+			
+		}catch(DataAccessException e){
+			e.printStackTrace();
+			rowNumber = 0;
+		}
+		return rowNumber > 0;	
+	}
+	
+	
+	/**
 	 * 入力項目をUserDataへ変換する
 	 * （このメソッドは入力チェックを実施したうえで呼び出すこと）
 	 * @param from 入力データ

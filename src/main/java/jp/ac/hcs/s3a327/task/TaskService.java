@@ -77,7 +77,7 @@ public class TaskService {
 			
 	}
 	
-	public boolean deleteOne(int id) throws ParseException, java.text.ParseException{
+	public boolean deleteOne(int id){
 		boolean isSuccess = false;
 		
 		try {
@@ -91,9 +91,7 @@ public class TaskService {
 			e.printStackTrace();
 			
 		}
-		
-		return isSuccess;
-			
+		return isSuccess;	
 	}
 	
 	/**

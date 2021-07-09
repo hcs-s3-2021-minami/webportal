@@ -113,7 +113,7 @@
 				</form>
 					<hr>
 				<form method="post" th:action="@{/user/delete}" th:object="${userData}">
-					<input type="hidden" th:value="*{user_id}">
+					<input type="hidden" th:value="*{user_id}" name="id">
 					<button class="btn btn-warning" type="submit" name="delete">削除</button>
 				</form>
 			</div>

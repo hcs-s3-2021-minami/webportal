@@ -9,8 +9,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import lombok.extern.slf4j.Slf4j;
 @Slf4j
@@ -81,42 +81,46 @@ public class UserController {
 	}
 	
 	/**
-	 * ユーザ登録画面（管理者用）を表示する。
+	 * ユーザ詳細画面（管理者用）を表示する。
 	 * @param form 登録時の入力チェック用UserForm
 	 * @param model
-	 * @return ユーザ登録画面（管理者用）
+	 * @return ユーザ詳細画面（管理者用）
 	 */
 	 
 	@GetMapping("/user/detail/{id}")
-	public String getUserDetail(@PathVariable("id") String user_id,
+	public String getUserDetail(String user_id,
 			Principal principal, Model model){
-		
+				
+		//3.ユーザ情報の取得
 		UserData data = userService.selectOne(user_id);
+		
+		log.info("[" + principal.getName() + "]ユーザ詳細");
 		
 		model.addAttribute("userData",data);
 		return "user/detail";
 	}
 	
+	
 	/**
-	 * タスク管理リストから選択されたタスクをタスク管理リストから削除する
-	 * @param principal ログイン情報
+	 * ユーザ詳細画面（管理者用）を表示する。
+	 * @param form 登録時の入力チェック用UserForm
 	 * @param model
-	 * @return 結果画面 - タスク管理削除
-	 * @throws java.text.ParseException 
-	 * @throws ParseException 
+	 * @return ユーザ詳細画面（管理者用）
+	 */
 	 
-	@GetMapping("/taskdelete/{id}")
-	public String deleteTask(@PathVariable("id") int id,
-			Principal principal, Model model) throws ParseException, java.text.ParseException{
+	@PostMapping("/user/delete")
+	public String delete(@RequestParam("id") String user_id,
+			Principal principal, Model model){
+				
+		boolean isSuccess = userService.deleteOne(user_id);
 		
-		boolean isSuccess = taskService.deleteOne(id);
-		
-		log.info("[" + principal.getName() + "]タスク削除:  " + "id:  " + id);
+		log.info("[" + principal.getName() + "]ユーザ削除");
 		if (isSuccess) {
 			log.info("削除成功");
 		}else {
 			log.info("削除失敗");
 		}
-		return getTasklist(principal,model);
-	}*/
+		return getUserList(principal,model);
+	}
+	
 }
