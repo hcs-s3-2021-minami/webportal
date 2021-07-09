@@ -68,6 +68,7 @@ public class UserRepository {
 		UserEntity entity = mappingSelectResult(resultList);
 		// 必ず1件のみのため、最初のUserDataを取り出す
 		UserData data = entity.getUserlist().get(0);
+		System.out.println("あああ"+data);
 		return data;
 	}
 

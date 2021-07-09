@@ -76,14 +76,13 @@ public class UserService {
 	 * @return 処理結果（成功：true,失敗：false）
 	 */
 	public boolean deleteOne(String user_id) {
-		int rowNumber;
+		int rowNumber = 0;
 		
 		try {
 			rowNumber = userRepository.deleteOne(user_id);
 			
 		}catch(DataAccessException e){
 			e.printStackTrace();
-			rowNumber = 0;
 		}
 		return rowNumber > 0;	
 	}
