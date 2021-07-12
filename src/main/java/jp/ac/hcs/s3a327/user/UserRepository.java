@@ -60,7 +60,7 @@ public class UserRepository {
 	/**
 	 * UserテーブルからユーザIDをキーにデータを1件を取得.
 	 * @param user_id 検索するユーザID
-	 * @return UserEntity
+	 * @return UserData
 	 * @throws DataAccessException
 	 */
 	public UserData selectOne(String user_id) throws DataAccessException {
@@ -68,7 +68,6 @@ public class UserRepository {
 		UserEntity entity = mappingSelectResult(resultList);
 		// 必ず1件のみのため、最初のUserDataを取り出す
 		UserData data = entity.getUserlist().get(0);
-		System.out.println("あああ"+data);
 		return data;
 	}
 
@@ -86,7 +85,6 @@ public class UserRepository {
 			data.setUser_name((String) map.get("user_name"));
 			data.setDarkmode((boolean) map.get("darkmode"));
 			data.setRole((String) map.get("role"));
-			
 			
 			entity.getUserlist().add(data);
 		}

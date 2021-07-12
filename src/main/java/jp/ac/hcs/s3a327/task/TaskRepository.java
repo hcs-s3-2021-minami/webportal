@@ -59,6 +59,7 @@ public class TaskRepository {
 		}
 		return entity;
 	}
+	
 	/**
 	 * Taskテーブルにデータを1件追加する。
 	 * @param data 追加するユーザ情報
@@ -72,6 +73,7 @@ public class TaskRepository {
 						data.getLimitday());
 		return rowNumber;
 	}
+	
 	/**
 	 * Taskテーブルにデータを1件削除する。
 	 * @param id 削除するタスクID
