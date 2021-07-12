@@ -46,7 +46,7 @@ public class TaskService {
 	/**
 	 * 指定したユーザIDのタスク情報を1件追加する。
 	 * @param userId
-	 * @return TaskEntity
+	 * @return isSuccess
 	 * @throws java.text.ParseException 
 	 */
 	public boolean insertOne(String userId, String comment, String limitday) throws ParseException, java.text.ParseException{
@@ -57,7 +57,7 @@ public class TaskService {
 		data.setComment(comment);
 		data.setLimitday(dateFormat.parse(limitday));
 		boolean isSuccess = false;
-//		boolean result = limitday instanceof Date;
+
 		try {
 			int rowNumber = taskRepository.insertOne(data);
 			
@@ -77,6 +77,12 @@ public class TaskService {
 			
 	}
 	
+	/**
+	 * 指定したユーザIDのタスク情報を1件削除する。
+	 * @param id
+	 * @return isSuccess
+	 * @throws java.text.ParseException 
+	 */
 	public boolean deleteOne(int id){
 		boolean isSuccess = false;
 		

@@ -20,7 +20,7 @@ public class WeatherController {
 	 * @param cityCode 都市コード
 	 * @param principal ログイン情報
 	 * @param model
-	 * @return 結果画面 - 日付
+	 * @return 結果画面 - 天気予報結果
 	 */
 	@PostMapping("/weather")
 	public String getWeather(@RequestParam("cityCode") String cityCode,

@@ -38,12 +38,11 @@ public class UserController {
 	}
 	
 	/**
-	 * ユーザ登録画面（管理者用）を表示する。
+	 * ユーザ登録画面（管理者用）を表示する
 	 * @param form 登録時の入力チェック用UserForm
 	 * @param model
-	 * @return ユーザ登録画面（管理者用）
+	 * @return 結果画面 - ユーザ登録（管理者用）
 	 */
-	 
 	@GetMapping("/user/insert")
 	public String getUserInsert(UserForm form, Model model){
 		return "user/insert";
@@ -51,13 +50,12 @@ public class UserController {
 	
 	/**
 	 * 1件分のユーザ情報をデータベースに登録する。
-	 * @param form 登録ｓるうユーザ情報（パスワードは平文）
+	 * @param form 登録するユーザ情報（パスワードは平文）
 	 * @param bindingResult データバインド実施結果
 	 * @param principal ログイン情報
 	 * @param model
-	 * @return ユーザ一覧画面
+	 * @return 結果画面 - ユーザ一覧（管理者用）
 	 */
-	 
 	@PostMapping("/user/insert")
 	public String getUserInsert(@ModelAttribute @Validated UserForm form,
 			BindingResult bindingResult,
@@ -84,10 +82,10 @@ public class UserController {
 	/**
 	 * ユーザ詳細画面（管理者用）を表示する。
 	 * @param form 登録時の入力チェック用UserForm
+	 * @param principal ログイン情報
 	 * @param model
-	 * @return ユーザ詳細画面（管理者用）
+	 * @return 結果画面 - ユーザ詳細（管理者用）
 	 */
-	 
 	@GetMapping("/user/detail/{id}")
 	public String getUserDetail(@PathVariable("id") String user_id,
 			Principal principal, Model model){
@@ -103,12 +101,11 @@ public class UserController {
 	
 	
 	/**
-	 * ユーザ詳細画面（管理者用）を表示する。
-	 * @param form 登録時の入力チェック用UserForm
+	 * 1件分のユーザ情報をデータベースから削除する。
+	 * @param principal ログイン情報
 	 * @param model
-	 * @return ユーザ詳細画面（管理者用）
+	 * @return 結果画面 - ユーザ一覧（管理者用）
 	 */
-	 
 	@PostMapping("/user/delete")
 	public String delete(@RequestParam("id") String user_id,
 			Principal principal, Model model){

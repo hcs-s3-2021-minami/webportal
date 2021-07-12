@@ -20,7 +20,7 @@ public class ZipCodeController {
 	 * @param zipcode 検索する郵便番号（ハイフン無し）
 	 * @param principal ログイン情報
 	 * @param model
-	 * @return 結果画面 - 郵便番号
+	 * @return 結果画面 - 住所検索結果
 	 */
 	@PostMapping("/zip")
 	public String getZipCode(@RequestParam("zipcode") String zipcode,

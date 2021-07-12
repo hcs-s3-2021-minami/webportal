@@ -70,39 +70,27 @@
 			<h1>北海道グルメ</h1>
 			<h2 th:text="|*{shopname}の検索結果|"></h2>
 			<!-- 基本1件だが、API構造に従い繰り返し構文とする -->
-			
-			
 			<table class="table" th:each="shop : ${shopEntity.results}">
-				
-				
 					<tr>
 						<th scope="row">店名</th>
 						<th><a th:text="*{shop.name}"></a></th>
 					</tr>
 				
 					<tr>
-						<th scope="row">イメージ</th>
-						<td><img class="shopimage" th:src="*{shop.image}"/></td>
+						<th scope="row" style="border:none;">イメージ</th>
+						<td style="border:none;"><img class="shopimage" th:src="*{shop.image}"/></td>
 					</tr>
 					
 					<tr >
-						<th scope="row">アクセス</th>
-						<td th:text="*{shop.access}"></td>
+						<th scope="row" style="border:none;">アクセス</th>
+						<td th:text="*{shop.access}" style="border:none;"></td>
 					</tr>
 					
 					<tr >
-						<th scope="row">場所</th>
-						<td><a th:href="@{'https://www.google.com/maps/search/?api=1&query='+${shop.address}}" target="new" th:text="*{shop.address}"></a></td>
+						<th scope="row" style="border:none;">場所</th>
+						<td style="border:none;"><a th:href="@{'https://www.google.com/maps/search/?api=1&query='+${shop.address}}" target="new" th:text="*{shop.address}"></a></td>
 					</tr>
-					
-				
 			</table>
-			
-				<!-- ul th:each="shop : ${shopEntity.results}">
-					<li><img class="shopimage" th:src="*{shop.logo_image}"/></li>
-					<li><a th:href="@{'https://www.google.com/maps/search/?api=1&query='+${shop.address}}" target="new" th:text="*{shop.name}"></a></li>
-					<li><a th:text="*{shop.access}"></a></li>
-				</ul -->
 		</div>
 	</div>
 

@@ -27,7 +27,7 @@ public class TaskController {
 	 * タスク管理リストから情報を受け取り、結果画面を表示する
 	 * @param principal ログイン情報
 	 * @param model
-	 * @return 結果画面 - タスク管理リスト
+	 * @return 結果画面 - タスク管理
 	 */
 	@GetMapping("/tasklist")
 	public String getTasklist(Principal principal, Model model){
@@ -45,7 +45,7 @@ public class TaskController {
 	 * タスク管理リストから情報を受け取り、タスク管理リストに追加する
 	 * @param principal ログイン情報
 	 * @param model
-	 * @return 結果画面 - タスク管理追加
+	 * @return 結果画面 - タスク管理
 	 * @throws java.text.ParseException 
 	 * @throws ParseException 
 	 */

@@ -3,7 +3,7 @@ package jp.ac.hcs.s3a327.main;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-//@Slf4j
+
 @Controller
 public class LoginController {
 	
@@ -12,7 +12,6 @@ public class LoginController {
 	 * @param model
 	 * @return ログイン画面
 	 */
-	
 	@GetMapping("/login")
 	public String getLogin(Model model) {
 		return "login";
