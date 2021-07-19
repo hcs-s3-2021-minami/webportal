@@ -99,11 +99,51 @@ public class UserService {
 		data.setUser_id(form.getUser_id());
 		data.setPassword(form.getPassword());
 		data.setUser_name(form.getUser_name());
-		data.setDarkmode(form.isDarkmode());
+//		data.setDarkmode(form.isDarkmode());
 		data.setRole(form.getRole());
 		//初期値は有効とする
 		data.setEnabled(true);
 		return data;
 	}
+	
+	/**
+	 * 入力項目をUserDataへ変換する
+	 * （このメソッドは入力チェックを実施したうえで呼び出すこと）
+	 * @param from 入力データ
+	 * @return UserData
+	 */
+	public UserData refillToData(UserFormForUpdate form) {
+		UserData data = new UserData();
+		data.setUser_id(form.getUser_id());
+		data.setPassword(form.getPassword());
+		data.setUser_name(form.getUser_name());
+//		data.setDarkmode(form.isDarkmode());
+		data.setRole(form.getRole());
+//		//初期値は有効とする
+//		data.setEnabled(true);
+		return data;
+	}
+
+	/**
+	 * ユーザ情報を1件更新する。
+	 * @param userData更新するユーザ情報（パスワードは平文）
+	 * @return 処理結果（成功：true,失敗：false）
+	 */
+	public boolean updateOne(UserData data) {
+		int rowNumber;
+		try {
+			if(data.getPassword() == null) {
+				rowNumber = userRepository.updateOne(data);//(パスワード更新無)
+			}else {
+				rowNumber = userRepository.updateOneWithPassword(data);//(パスワード更新有)
+			}
+		}catch(DataAccessException e){
+			e.printStackTrace();
+			rowNumber = 0;
+		}
+		return rowNumber > 0;	
+	}
+
+
 	
 }

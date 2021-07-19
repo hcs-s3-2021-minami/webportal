@@ -121,4 +121,33 @@ public class UserController {
 		return getUserList(principal,model);
 	}
 	
+	/**
+	 * 1件分のユーザ情報をデータベースから更新する。
+	 * @param principal ログイン情報
+	 * @param model
+	 * @return 結果画面 - ユーザ一覧（管理者用）
+	 */
+	@PostMapping("/user/update")
+	public String update(@ModelAttribute @Validated UserFormForUpdate form,
+			BindingResult bindingResult,
+			Principal principal, Model model){
+				
+		//入力チェックに引っかかった場合、前の画面に戻る
+		if (bindingResult.hasErrors()) {
+			return getUserDetail(principal.getName(),principal,model);
+		}
+		
+		log.info("[" + principal.getName() + "]ユーザ情報更新データ:" + form.toString());
+				
+		UserData data = userService.refillToData(form);
+		boolean result = userService.updateOne(data);
+		if(result) {
+			model.addAttribute("message","ユーザ情報を更新しました。");
+		}else {
+			model.addAttribute("errorMessage","ユーザ情報の更新に失敗しました。操作をやり直してください。");
+		}
+		
+		return getUserList(principal,model);
+	}
+	
 }
