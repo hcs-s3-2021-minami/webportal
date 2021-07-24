@@ -67,7 +67,8 @@
 	<!-- コンテンツ -->
 	<div class="container">
 		<div class="content-box">
-			<h2>受験報告新規登録画面</h2>
+			<h2>ユーザ登録</h2>
+			<p>（管理者用）</p>
 
 			<div class="input-form">
 				<form method="post" th:action="@{/user/insert}"
@@ -100,16 +101,31 @@
 							th:errors="*{user_name}">user_name error</span>
 					</div>
 
-					<label for="role">権限設定</label>
+					<label for="role">ユーザ権限</label>
 					<div class="form-group input-box">
 						<div>
-							<input type="radio" name="role" value="ROLE_ADMIN" id="role1">管理
+							<input type="radio" name="role" value="STUDENT" id="role1">生徒
 						</div>
 						<div>
-							<input type="radio" name="role" value="ROLE_GENERAL" id="role2">一般
+							<input type="radio" name="role" value="TEACHER" id="role2">担任
+						</div>
+						<div>
+							<input type="radio" name="role" value="STAFF" id="role3">事務
 						</div>
 						<span class="text-danger" th:if="${#fields.hasErrors('role')}"
 							th:errors="*{role}">role error</span>
+					</div>
+					
+					<label for="user_class">所属クラス</label>
+					<div class="form-group input-box">
+						<input type="text" class="form-control" name="user_class"
+							placeholder="X0X0" th:field="*{user_name}">
+					</div>
+					
+					<label for="attendance_number">出席番号</label>
+					<div class="form-group input-box">
+						<input type="text" class="form-control" name="attendance_number"
+							placeholder="00" th:field="*{user_class}"> 
 					</div>
 
 					<button type="submit" class="btn btn-warning">登録</button>

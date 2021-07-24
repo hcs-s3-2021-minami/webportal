@@ -68,6 +68,15 @@
 	<div class="container">
 		<div class="content-box">
 			<h2>受験報告一覧</h2>
+			<form method="post" th:action="@{/user/searchId}">
+						<div class="input-group">
+							<input type="text" class="form-control" name="user_class"
+								placeholder="クラス : S3A3"> <span
+								class="input-group-btn">
+								<button type="submit" class="btn btn-success">検索</button>
+							</span>
+						</div>
+					</form>
 			<hr>
 			<table class="table table-borderless">
 				<thead class="table-dark">
@@ -78,6 +87,7 @@
 						<th scope="col">クラス</th>
 						<th scope="col">番号</th>
 						<th scope="col">日付</th>
+						<th scope="col"></th>
 					</tr>
 				</thead>
 				<tbody class="table-light">
@@ -88,11 +98,18 @@
 						<td th:text="${testreport.user_class}">
 						<td th:text="${testreport.attendance_number}">
 						<td th:text="${testreport.day}">
+						<td>
+						<form method="post" th:action="@{/testreport/csv}">
+							<button type="submit" class="btn btn-info">CSV出力</button>
+						</form>
 						</td>
 					</tr>
   				</tbody>
-			</table>	
-			
+			</table>
+			<hr>	
+			<form method="get" th:action="@{/testreport/insert}">
+				<button type="submit" class="btn btn-info">新規登録</button>
+			</form>
 		</div>
 	</div>
 
