@@ -25,12 +25,3 @@ CREATE TABLE IF NOT EXISTS task (
   limitday DATE
 );
 
-/* 受験報告テーブル */
-CREATE TABLE IF NOT EXISTS testreport (
-  id INT PRIMARY KEY,
-  status VARCHAR(10),
-  user_name VARCHAR(60),
-  user_class CHAR(4),
-  attendance_number INT(2),
-  day DATE
-);
