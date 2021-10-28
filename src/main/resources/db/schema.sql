@@ -24,4 +24,3 @@ CREATE TABLE IF NOT EXISTS task (
   comment VARCHAR(200),
   limitday DATE
 );
-

@@ -1,7 +1,6 @@
-/* 開発用にデータ削除を追加 : リリース時は消す */
+/* 開発用にデータ削除を追加 : リリース時は消す 
 DELETE FROM m_user;
-DELETE FROM task;
-DELETE FROM testreport;
+DELETE FROM task;*/
 
 /* ユーザマスタのデータ（ADMIN権限） PASS:pasword */
 INSERT INTO m_user (user_id, encrypted_password, user_name, darkmode, role, enabled)
